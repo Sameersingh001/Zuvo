@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZUVO Smart School Bus Tracking Platform</title>
+  <meta name="description"
+    content="ZUVO is India's most trusted school bus tracking platform. Real-time GPS, instant arrival alerts, and peace of mind for parents and schools." />
+  <link rel="icon" type="image/png" href="Logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- FLOATING NOTIFICATION TOAST CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ==========================================================================
+     NAVBAR
+     ========================================================================== -->
+  <nav class="nav" id="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo" onclick="showPage('home');return false">
+        <div class="nav-logo-box">
+          <img src="Logo.png" alt="ZUVO Logo" />
+        </div>
+        <div class="nav-logo-text-group">
+          <span class="nav-logo-text">ZUVO</span>
+          <span class="nav-logo-sub">TRACKING</span>
+        </div>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#" class="nav-link active" onclick="showPage('home');return false">Home</a>
+        <a href="#" class="nav-link" onclick="showPage('about');return false">About</a>
+        <a href="#" class="nav-link" onclick="showPage('pricing');return false">Pricing</a>
+        <a href="#" class="nav-link" onclick="showPage('contact');return false">Contact</a>
+        <a href="#" class="nav-link" onclick="showPage('legal');return false">Legal</a>
+        <a href="#" class="nav-link" onclick="showPage('refund');return false">Refund</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="../admin/index.html" class="btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+            <polyline points="10 17 15 12 10 7" />
+            <line x1="15" y1="12" x2="3" y2="12" />
+          </svg>
+          Admin Portal
+        </a>
+        <a href="#" class="btn-primary" onclick="showPage('pricing');return false">
+          Get Started
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </a>
+      </div>
+
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+     PAGE: HOME
+     ========================================================================== -->
+  <div class="page active" id="page-home">
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-mesh-grid"></div>
+      <div class="hero-glow-orb orb-left"></div>
+      <div class="hero-glow-orb orb-right"></div>
+
+      <div class="container hero-container">
+        <!-- Left Content -->
+        <div class="hero-content">
+
+          <h1 class="hero-title anim a2">
+            The Smartest Way To Track <br />
+            <span class="gradient-text">Every School Bus</span> <br />
+            In Real Time.
+          </h1>
+
+          <p class="hero-sub anim a3">
+            ZUVO delivers ultra-accurate 5-second GPS tracking, automatic arrival notifications, and peace of mind to
+            parents while giving schools seamless fleet command.
+          </p>
+
+          <!-- Interactive Hero Bus Quick Tracker Input -->
+          <form class="hero-search-box anim a4" onsubmit="handleHeroTrack(event)">
+            <div class="hero-search-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </div>
+            <input type="text" id="heroBusInput" placeholder="Enter school bus number (e.g. MH-04-E-2041)..."
+              value="MH-04-E-2041" />
+            <button type="submit" class="btn-search-track">
+              Track Live Bus
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round"
+                style="display:inline-block;vertical-align:middle;margin-left:4px">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </button>
+          </form>
+
+          <div class="hero-cta anim a4">
+            <a href="#waitlist" onclick="scrollToWaitlist();return false" class="btn-hero-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px">
+                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+                <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+                <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+              </svg>
+              Join The Waitlist
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+            <a href="#simulator" class="btn-hero-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+              Interactive Simulator
+            </a>
+          </div>
+
+          <div class="hero-trust anim a5">
+            <div class="trust-item">
+              <span class="trust-num">50,000+</span>
+              <span class="trust-label">Active Parents</span>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+              <span class="trust-num">1,200+</span>
+              <span class="trust-label">Partner Schools</span>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+              <span class="trust-num">99.98%</span>
+              <span class="trust-label">Service Uptime</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Visual with Hero Bus Image & Floating Interactive Widgets -->
+        <div class="hero-visual-wrap anim a3">
+          <div class="hero-image-card" id="heroVisualCard">
+            <div class="hero-image-inner">
+              <img src="hero-bus.jpg" alt="ZUVO Real-time Bus GPS Mobile Application" />
+            </div>
+
+            <!-- Floating Widget: Live GPS Active -->
+            <div class="floating-widget float-top-left"
+              onclick="showToast('Live GPS Active', 'Bus #14 is moving at 38 km/h on Route 12 with 5s updates', 'blue')">
+              <div class="fw-icon-box green">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <circle cx="12" cy="12" r="3" />
+                  <line x1="12" y1="2" x2="12" y2="4" />
+                  <line x1="12" y1="20" x2="12" y2="22" />
+                  <line x1="20" y1="12" x2="22" y2="12" />
+                  <line x1="2" y1="12" x2="4" y2="12" />
+                </svg>
+              </div>
+              <div class="fw-content">
+                <span class="fw-title">Bus #14 (MH-04-E)</span>
+                <span class="fw-sub">Speed: 38 km/h • On Schedule</span>
+                <span class="fw-badge-pill">● Live GPS 5s</span>
+              </div>
+            </div>
+
+            <!-- Floating Widget: ETA Countdown -->
+            <div class="floating-widget float-middle-right"
+              onclick="showToast('Arrival Notification', 'Bus arriving at School Gate in 4 minutes!', 'blue')">
+              <div class="fw-icon-box amber">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <div class="fw-content">
+                <span class="fw-title">ETA: 4 Minutes</span>
+                <span class="fw-sub">Approaching Gate #2</span>
+              </div>
+            </div>
+
+            <!-- Floating Widget: Verified Student Pickup -->
+            <div class="floating-widget float-bottom-right"
+              onclick="showToast('Student Boarded Safely', 'Aarav P. has been verified onboard by Driver Ramesh', 'green')">
+              <div class="fw-icon-box blue">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+              </div>
+              <div class="fw-content">
+                <span class="fw-title">Student Boarded Safely</span>
+                <span class="fw-sub">Aarav P. • Stop #3 (08:42 AM)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENTERPRISE TRUST & COMPLIANCE STRIP -->
+    <section class="trust-strip">
+      <div class="container trust-strip-inner">
+        <div class="trust-strip-item">
+          <div class="trust-strip-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <span>AIS-140 Govt Standard</span>
+        </div>
+        <div class="trust-strip-item">
+          <div class="trust-strip-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+          </div>
+          <span>DPDP Act 2023 Child Privacy</span>
+        </div>
+        <div class="trust-strip-item">
+          <div class="trust-strip-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg>
+          </div>
+          <span>5-Second Live Telemetry</span>
+        </div>
+        <div class="trust-strip-item">
+          <div class="trust-strip-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 14 14" />
+            </svg>
+          </div>
+          <span>99.98% Service Uptime SLA</span>
+        </div>
+        <div class="trust-strip-item">
+          <div class="trust-strip-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <span>AES-256 Bit Data Encryption</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+       PRE-LAUNCH WAITLIST SECTION
+       ========================================================= -->
+    <section class="prelaunch-section" id="waitlist" data-anim>
+      <!-- Animated background orbs -->
+      <div class="pl-orb pl-orb-1"></div>
+      <div class="pl-orb pl-orb-2"></div>
+      <div class="pl-orb pl-orb-3"></div>
+
+      <div class="container">
+        <div class="pl-inner">
+          <!-- Left: Info Panel -->
+          <div class="pl-info">
+            <div class="pl-launch-badge">
+              <span class="pl-launch-dot"></span>
+              Currently In Pre-Launch Phase
+            </div>
+            <h2 class="pl-title">
+              Be First To Experience<br />
+              <span class="pl-title-gradient">India's Smartest</span><br />
+              School Bus Platform
+            </h2>
+            <p class="pl-desc">
+              ZUVO is officially launching soon for schools across India. Join our exclusive early access waitlist to
+              get <strong>priority onboarding</strong>, dedicated setup assistance, and lifetime discount pricing.
+            </p>
+
+            <!-- Countdown Timer -->
+            <div class="pl-countdown" id="plCountdown">
+              <div class="pl-cd-unit">
+                <span class="pl-cd-num" id="cdDays">00</span>
+                <span class="pl-cd-label">Days</span>
+              </div>
+              <div class="pl-cd-sep">:</div>
+              <div class="pl-cd-unit">
+                <span class="pl-cd-num" id="cdHours">00</span>
+                <span class="pl-cd-label">Hours</span>
+              </div>
+              <div class="pl-cd-sep">:</div>
+              <div class="pl-cd-unit">
+                <span class="pl-cd-num" id="cdMins">00</span>
+                <span class="pl-cd-label">Minutes</span>
+              </div>
+              <div class="pl-cd-sep">:</div>
+              <div class="pl-cd-unit">
+                <span class="pl-cd-num" id="cdSecs">00</span>
+                <span class="pl-cd-label">Seconds</span>
+              </div>
+            </div>
+
+            <!-- Social Proof -->
+            <div class="pl-social-proof">
+              <div class="pl-avatars">
+                <div class="pl-av" style="background:linear-gradient(135deg,#2563eb,#4f46e5)">A</div>
+                <div class="pl-av" style="background:linear-gradient(135deg,#059669,#0d9488)">R</div>
+                <div class="pl-av" style="background:linear-gradient(135deg,#ea580c,#dc2626)">P</div>
+                <div class="pl-av" style="background:linear-gradient(135deg,#7c3aed,#9333ea)">S</div>
+                <div class="pl-av" style="background:linear-gradient(135deg,#0891b2,#0284c7)">M</div>
+              </div>
+              <div class="pl-social-text">
+                <strong id="plLeadCount">847</strong> school admins already joined
+                <div class="pl-social-stars">★★★★★ <span>Loved by principals</span></div>
+              </div>
+            </div>
+
+            <!-- Benefits list -->
+            <div class="pl-benefits">
+              <div class="pl-benefit-item">
+                <div class="pl-benefit-icon">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <span>Full platform early access with zero setup costs</span>
+              </div>
+              <div class="pl-benefit-item">
+                <div class="pl-benefit-icon">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <span>Priority onboarding with dedicated setup engineer</span>
+              </div>
+              <div class="pl-benefit-item">
+                <div class="pl-benefit-icon">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <span>Lifetime 40% early-bird pricing discount locked in</span>
+              </div>
+              <div class="pl-benefit-item">
+                <div class="pl-benefit-icon">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <span>Exclusive beta access to AI route optimizer feature</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Waitlist Form -->
+          <div class="pl-form-card" id="waitlistForm">
+            <div class="pl-form-head">
+              <div class="pl-form-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+                  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+                  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+                </svg>
+              </div>
+              <div>
+                <h3>Reserve Your Early Access Spot</h3>
+                <p>Takes less than 60 seconds. Zero spam, ever.</p>
+              </div>
+            </div>
+
+            <form id="waitlistFormEl" onsubmit="handleWaitlistSubmit(event)" novalidate>
+              <div class="pl-form-row">
+                <div class="pl-form-group">
+                  <label for="wlName">Your Full Name *</label>
+                  <input type="text" id="wlName" name="name" placeholder="Dr. Rajesh Sharma" required />
+                </div>
+                <div class="pl-form-group">
+                  <label for="wlEmail">Official Email *</label>
+                  <input type="email" id="wlEmail" name="email" placeholder="admin@yourschool.edu.in" required />
+                </div>
+              </div>
+
+              <div class="pl-form-row">
+                <div class="pl-form-group">
+                  <label for="wlPhone">Phone Number</label>
+                  <input type="tel" id="wlPhone" name="phone" placeholder="+91 98765 43210" />
+                </div>
+                <div class="pl-form-group">
+                  <label for="wlSchool">School / Institution Name</label>
+                  <input type="text" id="wlSchool" name="schoolName" placeholder="Delhi Public School" />
+                </div>
+              </div>
+
+              <div class="pl-form-row">
+                <div class="pl-form-group">
+                  <label for="wlCity">City</label>
+                  <input type="text" id="wlCity" name="city" placeholder="New Delhi" />
+                </div>
+                <div class="pl-form-group">
+                  <label for="wlBuses">Number of School Buses</label>
+                  <select id="wlBuses" name="busCount">
+                    <option value="">Select range</option>
+                    <option value="1-5">1 – 5 buses</option>
+                    <option value="6-15">6 – 15 buses</option>
+                    <option value="16-30">16 – 30 buses</option>
+                    <option value="31-60">31 – 60 buses</option>
+                    <option value="60+">60+ buses</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="pl-form-group">
+                <label for="wlRole">Your Role</label>
+                <select id="wlRole" name="role">
+                  <option value="other">Select your role</option>
+                  <option value="school_admin">School Administrator</option>
+                  <option value="principal">Principal / Vice-Principal</option>
+                  <option value="transport_manager">Transport Manager</option>
+                  <option value="parent">Parent Representative</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="pl-form-group">
+                <label for="wlMsg">Any special requirements? (Optional)</label>
+                <textarea id="wlMsg" name="message" rows="2"
+                  placeholder="E.g., We need RFID integration, multi-campus support…"></textarea>
+              </div>
+
+              <button type="submit" class="pl-submit-btn" id="wlSubmitBtn">
+                <span id="wlBtnText" style="display:inline-flex;align-items:center;justify-content:center;gap:8px">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"/>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                  </svg>
+                  Reserve My Early Access Spot
+                </span>
+                <div class="pl-spinner" id="wlSpinner" style="display:none"></div>
+              </button>
+
+              <p class="pl-form-note">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:4px">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                Your data is 100% private. No spam. Unsubscribe anytime.
+              </p>
+            </form>
+
+            <!-- Success State -->
+            <div id="wlSuccess" style="display:none" class="pl-success">
+              <div class="pl-success-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+              <h3>You're on the List!</h3>
+              <p>We've reserved your early access spot. Expect an exclusive invite from our team within 24–48 hours.</p>
+              <div class="pl-success-share">
+                <p style="font-size:.85rem;color:#475569;margin-bottom:10px">Share with a fellow school admin:</p>
+                <button onclick="shareWaitlist()" class="pl-share-btn">
+                  Share ZUVO Waitlist →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE TELEMETRY MARQUEE TICKER -->
+    <div class="live-ticker-wrap">
+      <div class="ticker-track">
+        <div class="ticker-item"><span class="ticker-dot"></span> Bus #04 arrived safely at DPS Campus (08:44 AM)</div>
+        <div class="ticker-item"><span class="ticker-dot"></span> Bus #18 departed Green Glen Stop on schedule</div>
+        <div class="ticker-item"><span class="ticker-dot"></span> Speed Check: 100% compliance across 42 active vehicles
+        </div>
+        <div class="ticker-item"><span class="ticker-dot"></span> 1,200+ Police-Verified drivers active across India
+        </div>
+        <div class="ticker-item"><span class="ticker-dot"></span> Morning Trip Check-in: 98.6% safe drop rate</div>
+        <!-- Repeat for seamless continuous loop -->
+        <div class="ticker-item"><span class="ticker-dot"></span> Bus #04 arrived safely at DPS Campus (08:44 AM)</div>
+        <div class="ticker-item"><span class="ticker-dot"></span> Bus #18 departed Green Glen Stop on schedule</div>
+        <div class="ticker-item"><span class="ticker-dot"></span> Speed Check: 100% compliance across 42 active vehicles
+        </div>
+        <div class="ticker-item"><span class="ticker-dot"></span> 1,200+ Police-Verified drivers active across India
+        </div>
+        <div class="ticker-item"><span class="ticker-dot"></span> Morning Trip Check-in: 98.6% safe drop rate</div>
+      </div>
+    </div>
+
+    <!-- DUAL AUDIENCE PERSONA SECTION (FOR PARENTS VS FOR SCHOOLS) -->
+    <section class="persona-section">
+      <div class="container">
+        <div class="sec-hd" data-anim>
+          <div class="sec-badge">Tailored Experiences</div>
+          <h2 class="sec-title">Built For Parents. Engineered For Schools.</h2>
+          <p class="sec-sub">Switch below to see how ZUVO solves daily transport challenges for both sides.</p>
+        </div>
+
+        <div class="persona-toggle-wrap" data-anim>
+          <div class="persona-toggle">
+            <button class="persona-tab active" id="tabParents" onclick="switchPersona('parents')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              For Parents &amp; Families
+            </button>
+            <button class="persona-tab" id="tabSchools" onclick="switchPersona('schools')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+              For Schools &amp; Fleet Admins
+            </button>
+          </div>
+        </div>
+
+        <!-- Persona View: Parents -->
+        <div class="persona-content active" id="viewParents" data-anim>
+          <div class="persona-list">
+            <div class="persona-item">
+              <div class="pi-icon" style="background:var(--primary-50);color:var(--primary)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 14 14" />
+                </svg>
+              </div>
+              <div>
+                <h3>Never Wait On The Road Again</h3>
+                <p>Receive proactive push notifications when the bus is 10 minutes and 3 minutes away from your stop,
+                  perfectly timed for your morning schedule.</p>
+              </div>
+            </div>
+
+            <div class="persona-item">
+              <div class="pi-icon" style="background:var(--accent-emerald-bg);color:var(--accent-emerald)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+              </div>
+              <div>
+                <h3>Verified Boarding &amp; Drop-off</h3>
+                <p>Get instant notification the exact second your child steps onto the bus and enters the school gate,
+                  confirmed by the bus attendant.</p>
+              </div>
+            </div>
+
+            <div class="persona-item">
+              <div class="pi-icon" style="background:var(--accent-purple-bg);color:var(--accent-purple)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.08 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+              </div>
+              <div>
+                <h3>Direct 1-Tap Driver Connection</h3>
+                <p>Call the bus driver or vehicle attendant with masked numbers for safety, without cluttering WhatsApp
+                  groups or managing phone books.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="persona-mockup-card">
+            <div
+              style="background:#ffffff;border-radius:18px;border:1px solid var(--border-light);padding:24px;box-shadow:var(--shadow-sm)">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+                <div style="font-weight:800;font-size:1rem;color:var(--text-heading)">Morning School Trip #12</div>
+                <span class="sv-status-chip">● Live ETA 08:32 AM</span>
+              </div>
+              <div class="mini-notif-ui" style="margin-bottom:14px">
+                <div
+                  style="width:36px;height:36px;border-radius:8px;background:var(--primary-50);color:var(--primary);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                  </svg>
+                </div>
+                <div style="font-size:0.82rem;line-height:1.4">
+                  <strong>ZUVO Alert: Bus 2 stops away</strong><br />
+                  <span style="color:var(--text-muted)">Please arrive at Stop #4 (Green Glen) in 5 minutes</span>
+                </div>
+              </div>
+              <div
+                style="background:#f8fafc;padding:12px;border-radius:12px;display:flex;align-items:center;justify-content:space-between">
+                <div>
+                  <small style="color:var(--text-muted);display:block">Driver in charge</small>
+                  <strong style="font-size:0.92rem">Ramesh Kumar (Verified)</strong>
+                </div>
+                <button
+                  onclick="showToast('Driver Call Initiated', 'Calling Driver Ramesh on verified direct line...', 'blue')"
+                  style="background:var(--accent-emerald);color:#fff;padding:8px 14px;border-radius:8px;font-weight:700;font-size:0.8rem">
+                  Call Driver
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Persona View: Schools -->
+        <div class="persona-content" id="viewSchools" data-anim>
+          <div class="persona-list">
+            <div class="persona-item">
+              <div class="pi-icon" style="background:var(--primary-50);color:var(--primary)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" />
+                  <line x1="8" y1="21" x2="16" y2="21" />
+                  <line x1="12" y1="17" x2="12" y2="21" />
+                </svg>
+              </div>
+              <div>
+                <h3>Single Command Tower For Entire Fleet</h3>
+                <p>Monitor 5 to 100+ buses simultaneously on a unified satellite overview. See delay alerts, live
+                  speeds, and fuel status at a glance.</p>
+              </div>
+            </div>
+
+            <div class="persona-item">
+              <div class="pi-icon" style="background:var(--accent-rose-bg);color:var(--accent-rose)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                  <line x1="12" y1="9" x2="12" y2="13" />
+                  <line x1="12" y1="17" x2="12.01" y2="17" />
+                </svg>
+              </div>
+              <div>
+                <h3>Instant Speed Violation &amp; Route Deviation Alarms</h3>
+                <p>Automated alerts trigger the second a vehicle exceeds 40 km/h or deviates from prescribed morning
+                  routes, preventing accidents.</p>
+              </div>
+            </div>
+
+            <div class="persona-item">
+              <div class="pi-icon" style="background:var(--accent-emerald-bg);color:var(--accent-emerald)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <polyline points="10 9 9 9 8 9" />
+                </svg>
+              </div>
+              <div>
+                <h3>Automated Parent Broadcasts</h3>
+                <p>Send instant push notifications or WhatsApp alerts to all 500+ parents with 1 click in case of sudden
+                  weather delays or route diversions.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="persona-mockup-card">
+            <div
+              style="background:#ffffff;border-radius:18px;border:1px solid var(--border-light);padding:24px;box-shadow:var(--shadow-sm)">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+                <div style="font-weight:800;font-size:1rem;color:var(--text-heading)">Campus Dispatch Console</div>
+                <span class="sv-status-chip">34/34 Active Fleets</span>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+                <div style="background:#f8fafc;padding:12px;border-radius:10px;text-align:center">
+                  <span style="font-size:1.3rem;font-weight:900;color:var(--primary);display:block">99.4%</span>
+                  <small style="color:var(--text-muted)">On-Time Rate</small>
+                </div>
+                <div style="background:#f8fafc;padding:12px;border-radius:10px;text-align:center">
+                  <span style="font-size:1.3rem;font-weight:900;color:var(--accent-emerald);display:block">0</span>
+                  <small style="color:var(--text-muted)">Speed Violations</small>
+                </div>
+              </div>
+              <button
+                onclick="showToast('Admin Broadcast', 'Emergency notification dispatched to all Route 14 parents!', 'blue')"
+                class="btn-primary" style="width:100%;justify-content:center">
+                Send Mass Parent Alert
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE ROUTE INTERACTIVE SIMULATOR SECTION WITH LIVE CONTROLS -->
+    <section class="sim-section" id="simulator">
+      <div class="container">
+        <div class="sim-container" data-anim>
+          <div class="sim-info">
+            <div class="sec-badge">Live Fleet Engine</div>
+            <h2>Interactive Real-Time Route Visualizer</h2>
+            <p>
+              Experience how ZUVO's precision tracking engine works. Click any of the interactive controls below to test
+              live simulations, trigger alerts, and see real-time updates!
+            </p>
+
+            <div class="sim-controls">
+              <button class="btn-sim-action primary" onclick="runRouteSimulation()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                ▶ Play Route Simulation
+              </button>
+
+              <button class="btn-sim-action secondary"
+                onclick="showToast('Parent Notification Sent', 'Lockscreen Alert: Bus MH-04 is approaching Stop 3 in 2 minutes!', 'blue')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                </svg>
+                Trigger Parent Arrival Alert
+              </button>
+
+              <button class="btn-sim-action alert"
+                onclick="showToast('Emergency SOS Dispatched', 'GPS Distress broadcasted to DPS Control Room with live coordinates: 12.9352° N, 77.6245° E', 'red')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                </svg>
+                Test Emergency SOS Protocol
+              </button>
+            </div>
+          </div>
+
+          <div class="sim-visual-box">
+            <div class="sv-head">
+              <div class="sv-bus-tag">
+                <div class="sv-bus-avatar">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="6" width="18" height="12" rx="2" />
+                    <circle cx="7" cy="18" r="1.5" />
+                    <circle cx="17" cy="18" r="1.5" />
+                    <path d="M3 11h18" />
+                  </svg>
+                </div>
+                <span>Bus #07 • Route Sunrise Green</span>
+              </div>
+              <div class="sv-status-chip" id="simStatusChip">
+                <span class="live-dot-green"></span>
+                En Route • On Time
+              </div>
+            </div>
+
+            <div class="sv-map-preview">
+              <div class="sv-route-line" id="simRouteLine">
+                <div class="sv-stop-node passed" id="simStop1">
+                  <div class="sv-node-circle">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <span class="sv-node-label">Stop 1</span>
+                  <span class="sv-node-time">08:15 AM</span>
+                </div>
+
+                <div class="sv-stop-node passed" id="simStop2">
+                  <div class="sv-node-circle">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <span class="sv-node-label">Stop 2</span>
+                  <span class="sv-node-time">08:24 AM</span>
+                </div>
+
+                <div class="sv-stop-node current" id="simStop3">
+                  <div class="sv-node-circle">●</div>
+                  <span class="sv-node-label" style="color:var(--primary);font-weight:800;">Stop 3 (Now)</span>
+                  <span class="sv-node-time" style="color:var(--primary);font-weight:700;">08:35 AM</span>
+                </div>
+
+                <div class="sv-stop-node" id="simStop4">
+                  <div class="sv-node-circle">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/></svg>
+                  </div>
+                  <span class="sv-node-label">Campus</span>
+                  <span class="sv-node-time">08:45 AM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="sv-stats-bar">
+              <div class="sv-stat-col">
+                <span class="sv-stat-val" id="simSpeedVal">42 km/h</span>
+                <span class="sv-stat-lbl">Current Speed</span>
+              </div>
+              <div class="sv-stat-col">
+                <span class="sv-stat-val" id="simEtaVal">10 mins</span>
+                <span class="sv-stat-lbl">Time to School</span>
+              </div>
+              <div class="sv-stat-col">
+                <span class="sv-stat-val" id="simKidsVal">34 / 36</span>
+                <span class="sv-stat-lbl">Kids Boarded</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENTO GRID FEATURES SECTION (REPLACING PLAIN TEXT CARDS WITH RICH MINI PREVIEWS) -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="sec-hd" data-anim>
+          <div class="sec-badge">Platform Capabilities</div>
+          <h2 class="sec-title">Engineered For Total Student Safety</h2>
+          <p class="sec-sub">Built specifically for the realities of Indian schools, traffic, and parents' daily
+            schedules.</p>
+        </div>
+
+        <div class="bento-grid">
+          <!-- Bento 1 (Large 2-column): Real-Time GPS -->
+          <div class="bento-card col-span-2" data-anim>
+            <div class="bento-head">
+              <div class="bento-icon-box" style="background:var(--primary-50);color:var(--primary)">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <span class="sv-status-chip">5-Second Refresh</span>
+            </div>
+            <h3>Sub-Meter Real-Time GPS Telemetry</h3>
+            <p>Continuous vehicle positioning transmitted every 5 seconds. Parents view the exact vehicle heading
+              direction, live street speed, and instant turn-by-turn road progress.</p>
+
+            <div class="bento-preview" style="display:flex;align-items:center;justify-content:space-between">
+              <div style="display:flex;align-items:center;gap:12px">
+                <span class="live-dot-green"></span>
+                <span style="font-size:0.88rem;font-weight:700">Live Satellite Uplink Active</span>
+              </div>
+              <span style="font-size:0.85rem;font-weight:800;color:var(--primary)">Latency: &lt; 240 ms</span>
+            </div>
+          </div>
+
+          <!-- Bento 2: Lockscreen Push Alerts -->
+          <div class="bento-card" data-anim>
+            <div class="bento-head">
+              <div class="bento-icon-box" style="background:var(--accent-purple-bg);color:var(--accent-purple)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                </svg>
+              </div>
+            </div>
+            <h3>Smart Geofence Push Alerts</h3>
+            <p>Lockscreen alerts when the bus is 1 km away, entering your neighborhood, or arriving at your stop.</p>
+
+            <div class="bento-preview">
+              <div class="mini-notif-ui">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                </svg>
+                <div style="font-size:0.78rem"><strong>Arriving in 3 mins</strong> at Stop #2</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bento 3: Student Attendance -->
+          <div class="bento-card" data-anim>
+            <div class="bento-head">
+              <div class="bento-icon-box" style="background:var(--accent-emerald-bg);color:var(--accent-emerald)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="8.5" cy="7" r="4" />
+                  <polyline points="17 11 19 13 23 9" />
+                </svg>
+              </div>
+            </div>
+            <h3>Digital Attendance &amp; Check-In</h3>
+            <p>RFID card tap or driver app roll-call ensures every child is accounted for on every morning and evening
+              run.</p>
+
+            <div class="bento-preview">
+              <div class="mini-attend-ui">
+                <div class="mini-attend-row"><span>Aarav Patel</span><span style="color:#059669;display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Boarded 08:14</span>
+                </div>
+                <div class="mini-attend-row"><span>Ananya Rao</span><span style="color:#059669;display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Boarded 08:22</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bento 4: 1-Touch Emergency SOS -->
+          <div class="bento-card" data-anim>
+            <div class="bento-head">
+              <div class="bento-icon-box" style="background:var(--accent-rose-bg);color:var(--accent-rose)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                  <line x1="12" y1="9" x2="12" y2="13" />
+                  <line x1="12" y1="17" x2="12.01" y2="17" />
+                </svg>
+              </div>
+            </div>
+            <h3>One-Touch SOS Emergency Alert</h3>
+            <p>Instant panic triggers from driver or parent app broadcast live GPS coordinates to school security and
+              emergency desks.</p>
+
+            <div class="bento-preview">
+              <div class="mini-sos-ui">
+                <div class="mini-sos-dot"></div>
+                <span>Emergency Desk Connected</span>
+                <span style="font-size:0.75rem;color:#b91c1c">Instant SLA</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bento 5: AI Route Optimization -->
+          <div class="bento-card" data-anim>
+            <div class="bento-head">
+              <div class="bento-icon-box" style="background:var(--accent-amber-bg);color:var(--accent-amber)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <polygon points="3 11 22 2 13 21 11 13 3 11" />
+                </svg>
+              </div>
+            </div>
+            <h3>Smart AI Route Sequencing</h3>
+            <p>Intelligent stop ordering avoids traffic choke points, reduces empty vehicle miles, and slashes school
+              fuel expenditures.</p>
+
+            <div class="bento-preview">
+              <div class="mini-fuel-ui">
+                <div><strong>31%</strong><span>Fuel Saved</span></div>
+                <div><strong>18 min</strong><span>Trip Cut</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE SCHOOL SAVINGS & FUEL ROI CALCULATOR -->
+    <section class="roi-section" data-anim>
+      <div class="container">
+        <div class="roi-card">
+          <div>
+            <div class="sec-badge">ROI Estimator</div>
+            <h2 style="font-size:2.2rem;font-weight:800;color:var(--text-heading);margin-bottom:12px">
+              Calculate Your School's Monthly Savings
+            </h2>
+            <p style="color:var(--text-muted);font-size:0.98rem;line-height:1.7">
+              See how much administrative time and operational fuel expense your institution saves by switching to ZUVO.
+            </p>
+
+            <div class="roi-slider-wrap">
+              <div class="roi-label-row">
+                <span>Fleet Size:</span>
+                <span class="roi-bus-count" id="roiBusCount">12 Buses</span>
+              </div>
+              <input type="range" min="2" max="50" value="12" class="roi-slider" id="roiSlider"
+                oninput="updateRoi(this.value)" />
+            </div>
+
+            <p style="font-size:0.84rem;color:var(--text-muted);margin-bottom:20px">
+              *Based on verified operational averages across 1,200+ partner schools in India.
+            </p>
+
+            <a href="#" onclick="showPage('contact');return false" class="btn-primary" style="display:inline-flex">
+              Get Institution Proposal →
+            </a>
+          </div>
+
+          <div class="roi-results-box">
+            <div class="roi-stat-row">
+              <div>
+                <span class="roi-stat-label">Admin Hours Saved</span>
+                <small style="display:block;color:#64748b;font-size:0.75rem">No more manual morning calls</small>
+              </div>
+              <span class="roi-stat-val" id="roiHours">144 hrs/mo</span>
+            </div>
+
+            <div class="roi-stat-row">
+              <div>
+                <span class="roi-stat-label">Estimated Fuel Savings</span>
+                <small style="display:block;color:#64748b;font-size:0.75rem">Via route optimization</small>
+              </div>
+              <span class="roi-stat-val" id="roiFuel">₹45,600/mo</span>
+            </div>
+
+            <div class="roi-stat-row">
+              <div>
+                <span class="roi-stat-label">Parent Call Reduction</span>
+                <small style="display:block;color:#64748b;font-size:0.75rem">Self-service live tracking</small>
+              </div>
+              <span class="roi-stat-val">94%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOBILE APP DOWNLOAD SECTION -->
+    <section class="app-section">
+      <div class="container">
+        <div class="app-card" data-anim>
+          <div>
+            <h2>Get The ZUVO Parent App</h2>
+            <p>
+              Download the top-rated school bus tracking app on iOS and Android. Enter your child's student registration
+              code to start tracking within 60 seconds.
+            </p>
+
+            <div class="app-features-list" style="margin-bottom:34px">
+              <div class="af-item">
+                <div class="af-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <span>Available for both iOS &amp; Android smartphones</span>
+              </div>
+              <div class="af-item">
+                <div class="af-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <span>Support for multiple children across different school buses</span>
+              </div>
+              <div class="af-item">
+                <div class="af-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <span>Sub-meter arrival notifications with morning alarm integration</span>
+              </div>
+            </div>
+
+            <div class="app-badges">
+              <a href="#" class="app-btn"
+                onclick="showToast('App Store', 'Redirecting to Apple App Store download...', 'blue');return false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.89c.66-.82 1.11-1.96.99-3.1-.96.04-2.13.64-2.82 1.45-.61.71-1.14 1.87-1 2.99 1.07.08 2.16-.54 2.83-1.34z" />
+                </svg>
+                <div class="app-btn-text">
+                  <small>Download on the</small>
+                  <strong>Apple App Store</strong>
+                </div>
+              </a>
+
+              <a href="#" class="app-btn"
+                onclick="showToast('Google Play', 'Redirecting to Google Play Store download...', 'green');return false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M3.609 1.814L13.792 12 3.61 22.186c-.378-.4-.61-.962-.61-1.614V3.428c0-.652.232-1.214.609-1.614zm11.605 11.605l2.257 2.257-11.834 6.782 9.577-9.039zm2.257-2.257L15.214 8.903l-9.577-9.04 11.834 6.782zm1.266 1.266l2.872 1.646c.866.496.866 1.308 0 1.804l-2.872 1.646-1.89-1.89 1.89-1.89z" />
+                </svg>
+                <div class="app-btn-text">
+                  <small>Get it on</small>
+                  <strong>Google Play</strong>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div style="text-align:center">
+            <div
+              style="background:#ffffff;border-radius:24px;padding:24px;display:inline-block;box-shadow:var(--shadow-lg)">
+              <!-- QR Code Simulation -->
+              <div
+                style="width:180px;height:180px;background:#f8fafc;border:2px dashed #cbd5e1;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text-heading)">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  style="margin-bottom:8px">
+                  <rect x="3" y="3" width="7" height="7" />
+                  <rect x="14" y="3" width="7" height="7" />
+                  <rect x="14" y="14" width="7" height="7" />
+                  <rect x="3" y="14" width="7" height="7" />
+                </svg>
+                <span style="font-size:0.75rem;font-weight:700">Scan To Install</span>
+              </div>
+              <p style="font-size:0.78rem;color:var(--text-muted);margin-top:12px;margin-bottom:0">iOS &amp; Android QR
+                Link</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="section">
+      <div class="container">
+        <div class="sec-hd" data-anim>
+          <div class="sec-badge">Trust &amp; Feedback</div>
+          <h2 class="sec-title">Trusted By 1,200+ Schools Across India</h2>
+          <p class="sec-sub">See why schools, principals, and parents rely on ZUVO every single day.</p>
+        </div>
+
+        <div class="test-grid">
+          <div class="test-card" data-anim>
+            <div class="test-stars">
+              <!-- 5 SVG Stars -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </div>
+            <p class="test-text">
+              "Before ZUVO, we received 40+ anxious calls from parents every morning during heavy rain or traffic jams.
+              Now, parents check the live bus map themselves. It transformed our transport operations completely."
+            </p>
+            <div class="test-author">
+              <div class="test-avatar" style="background:#eff6ff;color:#2563eb">PM</div>
+              <div class="test-info">
+                <strong>Priya Mehta</strong>
+                <span>Parent, Delhi Public School</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="test-card" data-anim>
+            <div class="test-stars">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </div>
+            <p class="test-text">
+              "Managing 34 buses across South Mumbai was a logistical nightmare. ZUVO's central admin dashboard gives me
+              real-time speed monitoring, delay alerts, and driver attendance at a glance. Unbeatable reliability."
+            </p>
+            <div class="test-author">
+              <div class="test-avatar" style="background:#f5f3ff;color:#7c3aed">RK</div>
+              <div class="test-info">
+                <strong>Rajesh Kumar</strong>
+                <span>Principal, Sunrise Academy, Mumbai</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="test-card" data-anim>
+            <div class="test-stars">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </div>
+            <p class="test-text">
+              "The accuracy is pinpoint. I get a notification when the bus is 8 minutes away, so my child is never
+              waiting on the roadside under harsh sun or rain. Every school in India should adopt ZUVO."
+            </p>
+            <div class="test-author">
+              <div class="test-avatar" style="background:#ecfdf5;color:#059669">SS</div>
+              <div class="test-info">
+                <strong>Sunita Sharma</strong>
+                <span>Parent, Bengaluru</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="container">
+      <div class="cta-section" data-anim>
+        <div class="cta-mesh-pattern"></div>
+        <h2 class="cta-title">Upgrade Your School Transport Today</h2>
+        <p class="cta-sub">
+          Join over 1,200 institutions protecting 50,000+ students daily. Zero credit card required to start.
+        </p>
+        <div class="cta-btns">
+          <a href="../admin/index.html" class="btn-cta-white">
+            Get Started Now
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+          <a href="#" class="btn-cta-outline" onclick="showPage('contact');return false">
+            Speak With Our Team
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================================================
+     PAGE: ABOUT
+     ========================================================================== -->
+  <div class="page" id="page-about">
+    <section class="page-hero">
+      <div class="container">
+        <div class="sec-badge">Our Mission</div>
+        <h1 class="page-hero-title">
+          Making Every School Commute <br />
+          <span class="gradient-text">Safe, Predictable &amp; Stress-Free</span>
+        </h1>
+        <p class="page-hero-sub">
+          Founded in 2023, ZUVO was built by parents and software engineers determined to replace uncertainty with
+          real-time clarity.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="about-grid">
+          <div data-anim>
+            <h2 style="font-size:2.2rem;font-weight:800;color:var(--text-heading);margin-bottom:20px;line-height:1.25">
+              From A Parent's Morning Worry To India's Leading School Bus Platform
+            </h2>
+            <p style="color:var(--text-body);line-height:1.8;margin-bottom:16px;font-size:1.02rem">
+              ZUVO was born when our founder spent 50 minutes waiting at a bus stop with his 6-year-old daughter during
+              heavy rain, without any way to know whether the bus was stuck in traffic or had already passed.
+            </p>
+            <p style="color:var(--text-body);line-height:1.8;margin-bottom:16px;font-size:1.02rem">
+              That frustration sparked a mission: leverage consumer-grade GPS mapping technology with enterprise-grade
+              school transport dispatch tools.
+            </p>
+            <p style="color:var(--text-body);line-height:1.8;font-size:1.02rem">
+              Today, ZUVO powers thousands of daily routes across 28 states, preventing roadside delays and providing
+              parents and school administrators absolute peace of mind.
+            </p>
+          </div>
+
+          <div class="about-stats" data-anim>
+            <div class="asc">
+              <span class="asc-n" style="color:#2563eb">1,200+</span>
+              <span>Institutions</span>
+            </div>
+            <div class="asc">
+              <span class="asc-n" style="color:#7c3aed">50,000+</span>
+              <span>Happy Parents</span>
+            </div>
+            <div class="asc">
+              <span class="asc-n" style="color:#059669">5 Million+</span>
+              <span>Safe Trips Monitored</span>
+            </div>
+            <div class="asc">
+              <span class="asc-n" style="color:#ea580c">28</span>
+              <span>Indian States</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUES SECTION -->
+    <section class="section"
+      style="background:#f8fafc;border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle)">
+      <div class="container">
+        <div class="sec-hd" data-anim>
+          <div class="sec-badge">Our Guiding Values</div>
+          <h2 class="sec-title">What Drives Everything We Build</h2>
+        </div>
+
+        <div class="values-grid">
+          <div class="val-card" data-anim>
+            <div class="val-icon" style="background:var(--accent-emerald-bg);color:var(--accent-emerald)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            </div>
+            <h3>Student Safety First</h3>
+            <p>Every line of code and feature is evaluated on one question: does this protect students?</p>
+          </div>
+
+          <div class="val-card" data-anim>
+            <div class="val-icon" style="background:var(--primary-50);color:var(--primary)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
+            </div>
+            <h3>Radical Transparency</h3>
+            <p>No obscure telemetry or hidden fees. Transparent ETAs, clear pricing, and open communication.</p>
+          </div>
+
+          <div class="val-card" data-anim>
+            <div class="val-icon" style="background:var(--accent-purple-bg);color:var(--accent-purple)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+            </div>
+            <h3>Built For India</h3>
+            <p>Optimized for low-bandwidth 4G connectivity, offline route sync, and dynamic Indian road conditions.</p>
+          </div>
+
+          <div class="val-card" data-anim>
+            <div class="val-icon" style="background:var(--accent-amber-bg);color:var(--accent-amber)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v4" />
+                <path d="M12 18v4" />
+                <path d="M4.93 4.93l2.83 2.83" />
+                <path d="M16.24 16.24l2.83 2.83" />
+                <path d="M2 12h4" />
+                <path d="M18 12h4" />
+                <path d="M4.93 19.07l2.83-2.83" />
+                <path d="M16.24 7.76l2.83-2.83" />
+              </svg>
+            </div>
+            <h3>Continuous Innovation</h3>
+            <p>Weekly product updates driven directly by school feedback, driver insights, and parental inputs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEADERSHIP TEAM -->
+    <section class="section">
+      <div class="container">
+        <div class="sec-hd" data-anim>
+          <div class="sec-badge">Leadership</div>
+          <h2 class="sec-title">Meet The People Behind ZUVO</h2>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-card" data-anim>
+            <div class="team-av" style="background:linear-gradient(135deg,#2563eb,#4f46e5)">AV</div>
+            <h3>Arjun Verma</h3>
+            <span>CEO &amp; Co-Founder</span>
+            <p>Ex-Product Director at Ola Mobility. Parent of two. Passionate about road safety &amp; urban transport.
+            </p>
+          </div>
+
+          <div class="team-card" data-anim>
+            <div class="team-av" style="background:linear-gradient(135deg,#7c3aed,#9333ea)">PG</div>
+            <h3>Priya Gupta</h3>
+            <span>CTO &amp; Co-Founder</span>
+            <p>Former Senior Staff Engineer at Google Maps. Specialist in real-time geospatial distributed systems.</p>
+          </div>
+
+          <div class="team-card" data-anim>
+            <div class="team-av" style="background:linear-gradient(135deg,#059669,#0d9488)">RS</div>
+            <h3>Rahul Sharma</h3>
+            <span>Head of Product Design</span>
+            <p>Former UI/UX Lead at Swiggy. Focused on crystal-clear accessibility and emergency UI flows.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================================================
+     PAGE: PRICING
+     ========================================================================== -->
+  <div class="page" id="page-pricing">
+    <section class="page-hero">
+      <div class="container">
+        <div class="sec-badge">Transparent Plans</div>
+        <h1 class="page-hero-title">
+          Fair Pricing For Every <br />
+          <span class="gradient-text">School Fleet Size</span>
+        </h1>
+        <p class="page-hero-sub">
+          Transparent, predictable plans built for Indian schools. Scale as your fleet grows. No hidden hardware fees.
+        </p>
+
+        <div class="billing-toggle">
+          <span class="btl active" id="btl-m" onclick="setBilling('m')">Billed Monthly</span>
+          <div class="bts" onclick="toggleBilling()">
+            <div class="btt" id="btt"></div>
+          </div>
+          <span class="btl" id="btl-y" onclick="setBilling('y')">
+            Billed Annually
+            <span class="save-tag">SAVE 20%</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:20px">
+      <div class="container">
+        <div class="pricing-grid">
+          <!-- Plan 1: Basic -->
+          <div class="pc" data-anim>
+            <div class="pc-ico" style="background:var(--primary-50);color:var(--primary)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+              </svg>
+            </div>
+            <h3>Basic</h3>
+            <div class="pc-price">
+              <span class="pcc">₹</span>
+              <span class="pca" data-m="499" data-y="4790">499</span>
+              <span class="pcp pcp-cycle">/ mo</span>
+            </div>
+            <div class="pc-annual-note" style="display:none">
+              <s>₹5,988</s> <span class="save-pill">Save ₹1,198 (₹399/mo)</span>
+            </div>
+            <p class="pcd">Ideal for single-campus schools &amp; small fleets up to 5 buses.</p>
+            <ul class="pcf">
+              <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Up to 5 Vehicles</li>
+              <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> 5 Driver Mobile Accounts</li>
+              <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Up to 200 Students</li>
+              <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Up to 10 Routes</li>
+              <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Real-Time Live GPS</li>
+              <li><span class="icon-cross"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span> Fleet Speed Analytics</li>
+            </ul>
+            <a href="../admin/index.html" class="pc-btn primary">Select Basic Plan</a>
+          </div>
+
+          <!-- Plan 3: Pro -->
+          <div class="pc popular" data-anim>
+            <div class="pop-tag">MOST POPULAR</div>
+            <div class="pc-ico" style="background:var(--accent-purple-bg);color:var(--accent-purple)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+            </div>
+            <h3>Pro</h3>
+            <div class="pc-price">
+              <span class="pcc">₹</span>
+              <span class="pca" data-m="899" data-y="8630">899</span>
+              <span class="pcp pcp-cycle">/ mo</span>
+            </div>
+            <div class="pc-annual-note" style="display:none">
+              <s>₹10,788</s> <span class="save-pill">Save ₹2,158 (₹719/mo)</span>
+            </div>
+            <p class="pcd">Complete fleet management for growing institutions.</p>
+            <ul class="pcf">
+              <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Up to 25 Vehicles</li>
+              <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> 25 Driver Mobile Accounts</li>
+              <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Up to 1,000 Students</li>
+              <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Up to 50 Routes</li>
+              <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Analytics Dashboard</li>
+              <li><span class="icon-cross"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span> Custom School Branding</li>
+            </ul>
+            <a href="../admin/index.html" class="pc-btn purple">Get Pro Plan</a>
+          </div>
+
+          <!-- Plan 4: Enterprise -->
+          <div class="pc" data-anim>
+            <div class="pc-ico" style="background:var(--accent-emerald-bg);color:var(--accent-emerald)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+            <h3>Enterprise</h3>
+            <div class="pc-price">
+              <span class="pcc">₹</span>
+              <span class="pca" data-m="1299" data-y="12470">1,299</span>
+              <span class="pcp pcp-cycle">/ mo</span>
+            </div>
+            <div class="pc-annual-note" style="display:none">
+              <s>₹15,588</s> <span class="save-pill">Save ₹3,118 (₹1,039/mo)</span>
+            </div>
+            <p class="pcd">Full platform power for multi-campus schools &amp; large fleets.</p>
+            <ul class="pcf">
+              <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Up to 100 Vehicles</li>
+              <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> 100 Driver Mobile Accounts</li>
+              <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Up to 5,000 Students</li>
+              <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Up to 500 Routes</li>
+              <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Analytics Dashboard</li>
+              <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Custom School Branding</li>
+            </ul>
+            <a href="../admin/index.html" class="pc-btn green">Select Enterprise</a>
+          </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-sec" data-anim>
+          <h2 style="text-align:center;font-size:2rem;font-weight:800;color:var(--text-heading);margin-bottom:32px">
+            Frequently Asked Questions
+          </h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <button class="fq" onclick="toggleFaq(this)">
+                Do we need to install expensive GPS hardware in each bus?
+                <span class="fi">+</span>
+              </button>
+              <div class="fa">
+                No! ZUVO runs directly on any Android smartphone carried by the driver. We also support integration with
+                existing AIS-140 standard OBD GPS tracker devices if your school already has hardware installed.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="fq" onclick="toggleFaq(this)">
+                Can parents track the bus when it is not on school duty?
+                <span class="fi">+</span>
+              </button>
+              <div class="fa">
+                Never. GPS tracking is strictly active only while the authorized driver initiates a trip from their
+                verified ZUVO Driver app. As soon as the trip ends, location broadcasting terminates instantly to
+                safeguard driver privacy.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="fq" onclick="toggleFaq(this)">
+                How is payment and invoicing handled?
+                <span class="fi">+</span>
+              </button>
+              <div class="fa">
+                All transactions are processed securely in INR through Razorpay. You receive automated GST tax invoices
+                with your institution's registration details immediately upon subscription renewal.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="fq" onclick="toggleFaq(this)">
+                Can we upgrade or switch between plans anytime?
+                <span class="fi">+</span>
+              </button>
+              <div class="fa">
+                Yes, absolutely. You can upgrade from Basic to Pro or Enterprise directly within the ZUVO Admin Portal. Changes take effect immediately with pro-rated billing.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================================================
+     PAGE: CONTACT
+     ========================================================================== -->
+  <div class="page" id="page-contact">
+    <section class="page-hero">
+      <div class="container">
+        <div class="sec-badge">Support &amp; Inquiries</div>
+        <h1 class="page-hero-title">
+          We're Here To <span class="gradient-text">Help Your School</span>
+        </h1>
+        <p class="page-hero-sub">
+          Our enterprise transport team responds within 2 business hours. Reach out anytime.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:20px">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Contact Form -->
+          <div class="cfc" data-anim>
+            <h2>Send Us A Message</h2>
+            <p style="color:var(--text-muted);margin-bottom:28px">
+              Fill out your details and our school onboarding team will contact you.
+            </p>
+
+            <form id="contactForm" onsubmit="handleContact(event)">
+              <div class="cf-row">
+                <div class="cfg">
+                  <label>Your Name *</label>
+                  <input type="text" placeholder="Dr. Rajesh Mehra" required />
+                </div>
+                <div class="cfg">
+                  <label>Official Email *</label>
+                  <input type="email" placeholder="admin@dpschool.edu.in" required />
+                </div>
+              </div>
+
+              <div class="cf-row">
+                <div class="cfg">
+                  <label>Phone Number *</label>
+                  <input type="tel" placeholder="+91 98765 43210" required />
+                </div>
+                <div class="cfg">
+                  <label>Institution Name *</label>
+                  <input type="text" placeholder="Delhi Public School" required />
+                </div>
+              </div>
+
+              <div class="cfg">
+                <label>Inquiry Type</label>
+                <select required>
+                  <option value="">Select an option</option>
+                  <option>New School Onboarding &amp; Demo</option>
+                  <option>Fleet Pricing &amp; Custom Quote</option>
+                  <option>Technical &amp; Driver Support</option>
+                  <option>Partnership &amp; Channel Reseller</option>
+                </select>
+              </div>
+
+              <div class="cfg">
+                <label>How Can We Help You? *</label>
+                <textarea rows="4" placeholder="Tell us how many buses you operate and your target go-live date..."
+                  required></textarea>
+              </div>
+
+              <button type="submit" class="btn-submit">
+                Send Inquiry
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round"
+                  style="display:inline-block;vertical-align:middle;margin-left:6px">
+                  <line x1="22" y1="2" x2="11" y2="13" />
+                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+              </button>
+            </form>
+
+            <div id="cSuccess" style="display:none" class="success-msg">
+              <div
+                style="width:60px;height:60px;border-radius:50%;background:var(--accent-emerald-bg);color:var(--accent-emerald);display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <h3 style="font-size:1.5rem;font-weight:800;margin-bottom:8px">Inquiry Received!</h3>
+              <p style="color:var(--text-muted)">
+                Thank you for reaching out. A ZUVO education specialist will reach you within 2 hours.
+              </p>
+            </div>
+          </div>
+
+          <!-- Direct Contact Channels & Quick Help -->
+          <div class="cic" data-anim>
+            <div class="ci-card">
+              <div class="ci-i">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="16" x="2" y="4" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
+              </div>
+              <div>
+                <h4>Official Email</h4>
+                <p>support@zuvo.app</p>
+                <span>Response in under 2 hours</span>
+              </div>
+            </div>
+
+            <div class="ci-card">
+              <div class="ci-i" style="background:var(--accent-emerald-bg);color:var(--accent-emerald)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.08 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+              </div>
+              <div>
+                <h4>Helpline</h4>
+                <p>+91 (80) 4123-8890</p>
+                <span>Mon – Sat, 7:00 AM – 7:00 PM IST</span>
+              </div>
+            </div>
+
+            <div class="ci-card">
+              <div class="ci-i" style="background:var(--accent-cyan-bg);color:var(--accent-cyan)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                </svg>
+              </div>
+              <div>
+                <h4>WhatsApp Support</h4>
+                <p>+91 98765 43210</p>
+                <span>Quick response for school dispatchers</span>
+              </div>
+            </div>
+
+            <div class="ci-card">
+              <div class="ci-i" style="background:var(--accent-purple-bg);color:var(--accent-purple)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <div>
+                <h4>HQ Office</h4>
+                <p>Koramangala Tech Park</p>
+                <span>Bengaluru, Karnataka 560034</span>
+              </div>
+            </div>
+
+            <!-- Quick Help Links -->
+            <div class="help-links">
+              <h3>Knowledge &amp; Resources</h3>
+              <a href="#" class="hl">
+                <div class="hl-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <strong>Setup Documentation</strong>
+                  <small>Step-by-step school onboarding guides</small>
+                </div>
+              </a>
+
+              <a href="#" class="hl">
+                <div class="hl-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="23 7 16 12 23 17 23 7" />
+                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+                  </svg>
+                </div>
+                <div>
+                  <strong>Video Walkthroughs</strong>
+                  <small>Driver app and parent app video demos</small>
+                </div>
+              </a>
+
+              <a href="#" class="hl">
+                <div class="hl-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                </div>
+                <div>
+                  <strong>Help Center &amp; FAQs</strong>
+                  <small>Instant answers to common questions</small>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================================================
+     PAGE: LEGAL & TERMS
+     ========================================================================== -->
+  <div class="page" id="page-legal">
+    <section class="page-hero">
+      <div class="container">
+        <div class="sec-badge">Compliance &amp; Terms</div>
+        <h1 class="page-hero-title">
+          Terms of Service &amp; <span class="gradient-text">Privacy Policy</span>
+        </h1>
+        <p class="page-hero-sub">
+          Compliant with the Digital Personal Data Protection (DPDP) Act 2023 of India.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:20px">
+      <div class="container">
+        <div class="legal-layout">
+          <div class="ltoc">
+            <h4>Legal Directory</h4>
+            <a href="#" onclick="scrollLegal('tos');return false">1. Terms of Service</a>
+            <a href="#" onclick="scrollLegal('privacy');return false">2. Privacy Policy</a>
+            <a href="#" onclick="scrollLegal('cookies');return false">3. Cookie Policy</a>
+            <a href="#" onclick="scrollLegal('dpdp');return false">4. DPDP &amp; Child Safety</a>
+            <a href="#" onclick="scrollLegal('liability');return false">5. Limitation of Liability</a>
+          </div>
+
+          <div class="lbody">
+            <div id="ls-tos" class="ls">
+              <h2>1. Terms of Service</h2>
+              <p>
+                By accessing the ZUVO platform, mobile applications, or administrator console, you agree to be bound by
+                these Terms of Service. If you are entering into this agreement on behalf of an educational institution,
+                you warrant that you possess full administrative authorization to bind that entity.
+              </p>
+              <h3>Service Scope</h3>
+              <p>
+                ZUVO provides live vehicle telemetry, geofence trip management, driver status logging, and
+                notifications. We guarantee 99.9% platform availability across all school operating days.
+              </p>
+            </div>
+
+            <div id="ls-privacy" class="ls">
+              <h2>2. Privacy Policy &amp; Telemetry Safeguards</h2>
+              <p>
+                ZUVO Technologies Pvt. Ltd. treats student and location telemetry with highest confidentiality. We never
+                sell, monetize, or broker student travel information to commercial advertisers or third-party
+                aggregators.
+              </p>
+              <h3>Data Handling Principles</h3>
+              <ul class="legal-list">
+                <li>Driver GPS telemetry is recorded only while an active trip session is initiated by the authenticated
+                  driver.</li>
+                <li>Student identity records are encrypted end-to-end using AES-256 standard protocols.</li>
+                <li>Historical trip route records are purged automatically after 90 days unless archived by the school.
+                </li>
+              </ul>
+            </div>
+
+            <div id="ls-cookies" class="ls">
+              <h2>3. Cookie Policy</h2>
+              <p>
+                We utilize essential authentication tokens to maintain verified sessions. Non-essential tracking scripts
+                are never loaded without explicit institutional approval.
+              </p>
+            </div>
+
+            <div id="ls-dpdp" class="ls">
+              <h2>4. India DPDP Act 2023 Compliance</h2>
+              <p>
+                In accordance with Section 9 of India's Digital Personal Data Protection Act (2023), special safeguards
+                are enforced regarding children's data. Processing of minors' personal information is undertaken solely
+                with verified institutional and parental authorization.
+              </p>
+            </div>
+
+            <div id="ls-liability" class="ls">
+              <h2>5. Limitation of Liability</h2>
+              <p>
+                ZUVO operates as an information technology telemetry assistant. Physical vehicle operation, traffic
+                compliance, and onboard passenger discipline remain the sole responsibility of the respective school
+                administration and fleet drivers.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================================================
+     PAGE: REFUND POLICY
+     ========================================================================== -->
+  <div class="page" id="page-refund">
+    <section class="page-hero">
+      <div class="container">
+        <div class="sec-badge">Fair Policy</div>
+        <h1 class="page-hero-title">
+          Transparent &amp; Simple <span class="gradient-text">Refund Policy</span>
+        </h1>
+        <p class="page-hero-sub">
+          Zero hidden traps. 14-day 100% money-back guarantee on all institutional subscriptions.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:20px">
+      <div class="container" style="max-width:860px">
+        <div class="refund-hl" data-anim>
+          <div class="rh">
+            <div class="rh-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <polyline points="9 12 12 15 16 10" />
+              </svg>
+            </div>
+            <strong>14-Day Guarantee</strong>
+            <p>Full 100% refund within 14 calendar days of your initial payment date.</p>
+          </div>
+
+          <div class="rh">
+            <div class="rh-icon" style="background:var(--primary-50);color:var(--primary)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+            </div>
+            <strong>Fast Bank Settlement</strong>
+            <p>Processed within 3 to 5 business days directly back to your source account.</p>
+          </div>
+
+          <div class="rh">
+            <div class="rh-icon" style="background:var(--accent-purple-bg);color:var(--accent-purple)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <rect width="20" height="14" x="2" y="5" rx="2" />
+                <line x1="2" x2="22" y1="10" y2="10" />
+              </svg>
+            </div>
+            <strong>Original Payment Route</strong>
+            <p>Settled through original Razorpay channel (UPI, Net Banking, or Corporate Card).</p>
+          </div>
+        </div>
+
+        <div class="lbody" data-anim>
+          <div class="ls">
+            <h2>Our Commitment To Schools</h2>
+            <p>
+              At ZUVO, we want every partner institution to be completely confident in our platform's reliability. If
+              ZUVO does not meet your operational expectations within the first 14 days of activation, we will gladly
+              refund your full fee.
+            </p>
+
+            <h3>4-Step Simple Refund Process</h3>
+            <div class="refund-steps">
+              <div class="rs">
+                <div class="rsn">1</div>
+                <div>
+                  <strong>Submit Notice</strong>
+                  <p>Email billing@zuvo.app with your school's registered ID.</p>
+                </div>
+              </div>
+
+              <div class="rs">
+                <div class="rsn">2</div>
+                <div>
+                  <strong>Verification</strong>
+                  <p>Our accounts team verifies the subscription within 24 hours.</p>
+                </div>
+              </div>
+
+              <div class="rs">
+                <div class="rsn">3</div>
+                <div>
+                  <strong>Release Initiated</strong>
+                  <p>The Razorpay payment gateway initiates the bank refund.</p>
+                </div>
+              </div>
+
+              <div class="rs">
+                <div class="rsn">4</div>
+                <div>
+                  <strong>Amount Credited</strong>
+                  <p>Funds reflect back in your corporate account within 3–5 working days.</p>
+                </div>
+              </div>
+            </div>
+
+            <h3>Subscription Renewals &amp; Cancellations</h3>
+            <p>
+              You can pause or cancel your recurring subscription at any moment from the Admin Portal under Settings →
+              Billing. No cancellation fees will ever be assessed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================================================
+     UNIFIED MASTER FOOTER (ACROSS ALL PAGES)
+     ========================================================================== -->
+  <footer class="footer" id="masterFooter">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand Column -->
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="Logo.png" alt="ZUVO" class="footer-logo-img" />
+            <span>ZUVO</span>
+          </div>
+          <p>
+            India's most trusted school bus tracking platform. Built for safety, predictability, and complete fleet
+            control across thousands of schools.
+          </p>
+          <div class="footer-social">
+            <a href="#" aria-label="X (Twitter)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </a>
+            <a href="#" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                <rect width="4" height="12" x="2" y="9" />
+                <circle cx="4" cy="4" r="2" />
+              </svg>
+            </a>
+            <a href="#" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 1: Product -->
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#" onclick="showPage('home');return false">Live GPS Tracking</a>
+          <a href="#" onclick="showPage('home');return false">Parent Mobile App</a>
+          <a href="../admin/index.html">Admin Command Center</a>
+          <a href="#" onclick="showPage('home');return false">Driver Companion App</a>
+          <a href="#" onclick="showPage('pricing');return false">Pricing &amp; Plans</a>
+        </div>
+
+        <!-- Column 2: Solutions -->
+        <div class="footer-col">
+          <h4>Solutions</h4>
+          <a href="#" onclick="showPage('home');return false">Private K-12 Schools</a>
+          <a href="#" onclick="showPage('home');return false">Fleet Bus Operators</a>
+          <a href="#" onclick="showPage('home');return false">District School Boards</a>
+          <a href="#" onclick="showPage('home');return false">Parents &amp; Guardians</a>
+          <a href="#" onclick="showPage('home');return false">Campus Security</a>
+        </div>
+
+        <!-- Column 3: Company -->
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#" onclick="showPage('about');return false">About Us</a>
+          <a href="#" onclick="showPage('about');return false">Mission &amp; Values</a>
+          <a href="#" onclick="showPage('contact');return false">Contact Support</a>
+          <a href="#" onclick="showPage('contact');return false">Careers</a>
+          <a href="#" onclick="showPage('contact');return false">Press Kit</a>
+        </div>
+
+        <!-- Column 4: Legal -->
+        <div class="footer-col">
+          <h4>Trust &amp; Legal</h4>
+          <a href="#" onclick="showPage('legal');return false">Terms of Service</a>
+          <a href="#" onclick="showPage('legal');return false">Privacy Policy</a>
+          <a href="#" onclick="showPage('refund');return false">Refund Guarantee</a>
+          <a href="#" onclick="showPage('legal');return false">DPDP Act 2023</a>
+          <a href="#" onclick="showPage('legal');return false">Security Overview</a>
+        </div>
+      </div>
+
+      <!-- Bottom Strip -->
+      <div class="footer-bottom">
+        <p>© 2026 ZUVO Technologies Pvt. Ltd. All rights reserved.</p>
+
+        <div class="footer-status-badge">
+          <span class="live-dot-green"></span>
+          All Systems Operational • 99.98% Uptime
+        </div>
+
+        <p style="color:#64748b">Engineered with precision in Bengaluru, India</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
