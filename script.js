@@ -313,15 +313,38 @@ function setBilling(mode) {
   });
 }
 
-// Contact form submission
+// Contact form submission via WhatsApp
 function handleContact(e) {
   e.preventDefault();
+
+  const name = document.getElementById('cName')?.value?.trim() || '';
+  const email = document.getElementById('cEmail')?.value?.trim() || '';
+  const phone = document.getElementById('cPhone')?.value?.trim() || '';
+  const school = document.getElementById('cSchool')?.value?.trim() || '';
+  const inquiry = document.getElementById('cInquiry')?.value || '';
+  const message = document.getElementById('cMsg')?.value?.trim() || '';
+
+  const wpPhone = '919835051934';
+  const text = `*New ZUVO Website Inquiry:*\n` +
+    `• *Name:* ${name}\n` +
+    `• *Phone:* ${phone}\n` +
+    `• *Email:* ${email}\n` +
+    `• *Institution:* ${school}\n` +
+    `• *Inquiry Type:* ${inquiry}\n` +
+    `• *Message:* ${message}`;
+
+  const wpUrl = `https://wa.me/${wpPhone}?text=${encodeURIComponent(text)}`;
+
   const form = document.getElementById('contactForm');
   const success = document.getElementById('cSuccess');
-  if (form && success) {
-    form.style.display = 'none';
-    success.style.display = 'block';
-  }
+  const wpLink = document.getElementById('cWpLink');
+
+  if (wpLink) wpLink.href = wpUrl;
+  if (form) form.style.display = 'none';
+  if (success) success.style.display = 'block';
+
+  // Open WhatsApp in new tab
+  window.open(wpUrl, '_blank');
 }
 
 // Legal navigation scroll
