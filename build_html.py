@@ -56,11 +56,11 @@ html_content = r"""<!DOCTYPE html>
           <a href="#" onclick="showPage('about');return false" class="btn-hg">Learn More →</a>
         </div>
         <div class="hero-trust anim a5">
-          <div class="ti"><span class="tn">50K+</span><span>Parents</span></div>
+          <div class="ti"><span class="tn">5s</span><span>GPS Telemetry</span></div>
           <div class="td"></div>
-          <div class="ti"><span class="tn">1,200+</span><span>Schools</span></div>
+          <div class="ti"><span class="tn">AIS-140</span><span>Compliant</span></div>
           <div class="td"></div>
-          <div class="ti"><span class="tn">99.9%</span><span>Uptime</span></div>
+          <div class="ti"><span class="tn">Zero</span><span>Hardware Setup</span></div>
         </div>
       </div>
       <div class="hero-card-wrap anim a3">
@@ -127,7 +127,7 @@ html_content = r"""<!DOCTYPE html>
     <div class="cta-glow"></div>
     <div class="container">
       <h2 class="cta-title">Ready to transform school transport?</h2>
-      <p class="cta-sub">Join 1,200+ schools. Start your 14-day free trial today.</p>
+      <p class="cta-sub">Pre-register today for early rollout and private beta access.</p>
       <div class="cta-btns">
         <a href="../admin/index.html" class="btn-cta-p">Start Free Trial</a>
         <a href="#" class="btn-cta-g" onclick="showPage('contact');return false">Talk to Sales →</a>
@@ -156,8 +156,7 @@ html_content = r"""<!DOCTYPE html>
 <div class="page" id="page-about">
   <section class="page-hero"><div class="page-hero-glow"></div><div class="container"><div class="sec-badge" style="margin-bottom:16px">Our Story</div><h1 class="page-hero-title">We make school<br/><span class="gradient-text">commutes safer</span></h1><p class="page-hero-sub">Founded in 2023, ZUVO was born from a simple idea: every parent deserves to know their child is safe.</p></div></section>
   <section class="section"><div class="container"><div class="about-grid">
-    <div data-anim><h2 style="font-size:1.9rem;font-weight:800;color:#0f172a;margin-bottom:20px;line-height:1.3">From a Parent's Frustration to India's Leading Solution</h2><p style="color:#475569;line-height:1.9;margin-bottom:14px">ZUVO was founded after our CEO spent 45 minutes waiting for his daughter's school bus with zero information. That frustration became a mission.</p><p style="color:#475569;line-height:1.9;margin-bottom:14px">Today, ZUVO serves 1,200+ schools, 50,000+ parents, and processes millions of location updates daily.</p><p style="color:#475569;line-height:1.9">Our platform runs across 28 states, and we're just getting started.</p></div>
-    <div class="about-stats" data-anim><div class="asc"><span class="asc-n" style="color:#2563eb">1,200+</span><span>Schools</span></div><div class="asc"><span class="asc-n" style="color:#7c3aed">50,000+</span><span>Parents</span></div><div class="asc"><span class="asc-n" style="color:#059669">5M+</span><span>Trips</span></div><div class="asc"><span class="asc-n" style="color:#ea580c">28</span><span>States</span></div></div>
+    <div data-anim style="max-width:800px;margin:0 auto;text-align:center"><h2 style="font-size:1.9rem;font-weight:800;color:#0f172a;margin-bottom:20px;line-height:1.3">Born From A Parent's Morning Worry</h2><p style="color:#475569;line-height:1.9;margin-bottom:14px">ZUVO was founded after our CEO spent 45 minutes waiting for his daughter's school bus with zero information. That frustration became a mission.</p><p style="color:#475569;line-height:1.9;margin-bottom:14px">We are building India's most dependable school bus tracking ecosystem designed for parents and schools.</p></div>
   </div></div></section>
   <section class="section" style="background:#f8fafc"><div class="container"><div class="sec-hd"><div class="sec-badge">Values</div><h2 class="sec-title">What drives us</h2></div><div class="values-grid"><div class="val-card" data-anim><div class="vi">🛡️</div><h3>Safety First</h3><p>Every feature: does this make a child safer?</p></div><div class="val-card" data-anim><div class="vi">🤝</div><h3>Transparency</h3><p>No hidden features, no dark patterns.</p></div><div class="val-card" data-anim><div class="vi">🚀</div><h3>Built for India</h3><p>Designed for Indian roads and schools.</p></div><div class="val-card" data-anim><div class="vi">💡</div><h3>Always Improving</h3><p>Weekly updates based on real feedback.</p></div></div></div></section>
   <section class="section"><div class="container"><div class="sec-hd"><div class="sec-badge">Team</div><h2 class="sec-title">People behind ZUVO</h2></div><div class="team-grid"><div class="team-card" data-anim><div class="team-av" style="background:linear-gradient(135deg,#2563eb,#7c3aed)">AV</div><h3>Arjun Verma</h3><span>CEO &amp; Co-Founder</span><p>Former product lead at Ola. Parent. Passionate about safety.</p></div><div class="team-card" data-anim><div class="team-av" style="background:linear-gradient(135deg,#7c3aed,#db2777)">PG</div><h3>Priya Gupta</h3><span>CTO &amp; Co-Founder</span><p>Ex-Google engineer. Real-time systems at scale.</p></div><div class="team-card" data-anim><div class="team-av" style="background:linear-gradient(135deg,#059669,#0891b2)">RS</div><h3>Rahul Sharma</h3><span>Head of Design</span><p>Obsessed with simplicity. Great UX saves lives.</p></div></div></div></section>

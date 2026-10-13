@@ -13,7 +13,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=2.0" />
 </head>
 
 <body>
@@ -43,6 +43,9 @@
         <a href="#" class="nav-link" onclick="showPage('contact');return false">Contact</a>
         <a href="#" class="nav-link" onclick="showPage('legal');return false">Legal</a>
         <a href="#" class="nav-link" onclick="showPage('refund');return false">Refund</a>
+        <div class="nav-mobile-cta">
+          <a href="#waitlist" onclick="scrollToWaitlist();closeMenu();return false" class="btn-primary" style="width:100%;justify-content:center;text-align:center;">Join Waitlist</a>
+        </div>
       </div>
 
       <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu">
@@ -65,9 +68,14 @@
         <!-- Left Content -->
         <div class="hero-content">
 
+          <div class="hero-badge-pill anim a1">
+            <span class="badge-tag">LIVE GPS</span>
+            <span class="badge-pill-text"><span class="live-dot-green"></span> 5-Second Realtime Updates &bull; AIS-140 Standard</span>
+          </div>
+
           <h1 class="hero-title anim a2">
-            The Smartest Way To Track <br />
-            <span class="gradient-text">Every School Bus</span> <br />
+            The Smartest Way To Track <br class="hero-desktop-br" />
+            <span class="gradient-text">Every School Bus</span> <br class="hero-desktop-br" />
             In Real Time.
           </h1>
 
@@ -78,15 +86,17 @@
 
           <!-- Interactive Hero Bus Quick Tracker Input -->
           <form class="hero-search-box anim a4" onsubmit="handleHeroTrack(event)">
-            <div class="hero-search-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              </svg>
+            <div class="hero-search-input-wrap">
+              <div class="hero-search-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+              </div>
+              <input type="text" id="heroBusInput" placeholder="Enter school bus number (e.g. MH-04-E-2041)..."
+                value="MH-04-E-2041" autocomplete="off" />
             </div>
-            <input type="text" id="heroBusInput" placeholder="Enter school bus number (e.g. MH-04-E-2041)..."
-              value="MH-04-E-2041" />
             <button type="submit" class="btn-search-track">
               Track Live Bus
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -121,6 +131,14 @@
               </svg>
               Interactive Simulator
             </a>
+          </div>
+
+          <div class="hero-trust anim a5">
+            <div class="trust-item"><span class="trust-num">5s</span><span class="trust-label">GPS Telemetry</span></div>
+            <div class="trust-divider"></div>
+            <div class="trust-item"><span class="trust-num">AIS-140</span><span class="trust-label">Govt Certified</span></div>
+            <div class="trust-divider"></div>
+            <div class="trust-item"><span class="trust-num">0-Cost</span><span class="trust-label">Hardware Setup</span></div>
           </div>
         </div>
 
@@ -1228,7 +1246,7 @@
               <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Real-Time Live GPS</li>
               <li><span class="icon-cross"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span> Fleet Speed Analytics</li>
             </ul>
-            <a href="../admin/index.html" class="pc-btn primary">Select Basic Plan</a>
+            <a href="#" onclick="showPage('contact');return false" class="pc-btn primary">Contact for More Details</a>
           </div>
 
           <!-- Plan 3: Pro -->
@@ -1289,7 +1307,7 @@
               <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Analytics Dashboard</li>
               <li><span class="icon-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Custom School Branding</li>
             </ul>
-            <a href="../admin/index.html" class="pc-btn green">Select Enterprise</a>
+            <a href="#" onclick="showPage('contact');return false" class="pc-btn green">Contact for More Details</a>
           </div>
         </div>
 
@@ -1775,7 +1793,7 @@
           <h4>Product</h4>
           <a href="#" onclick="showPage('home');return false">Live GPS Tracking</a>
           <a href="#" onclick="showPage('home');return false">Parent Mobile App</a>
-          <a href="../admin/index.html">Admin Command Center</a>
+          <a href="#" onclick="showPage('contact');return false">Institutional Early Access</a>
           <a href="#" onclick="showPage('home');return false">Driver Companion App</a>
           <a href="#" onclick="showPage('pricing');return false">Pricing &amp; Plans</a>
         </div>
@@ -1825,7 +1843,7 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=2.0"></script>
 </body>
 
 </html>

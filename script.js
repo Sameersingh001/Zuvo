@@ -43,13 +43,28 @@ function showPage(name) {
 // Mobile Hamburger Menu
 function toggleMenu() {
   const links = document.getElementById('navLinks');
+  const btn = document.getElementById('hamburger');
   if (links) links.classList.toggle('open');
+  if (btn) btn.classList.toggle('open');
 }
 
 function closeMenu() {
   const links = document.getElementById('navLinks');
+  const btn = document.getElementById('hamburger');
   if (links) links.classList.remove('open');
+  if (btn) btn.classList.remove('open');
 }
+
+// Close mobile menu on click outside
+document.addEventListener('click', (e) => {
+  const links = document.getElementById('navLinks');
+  const btn = document.getElementById('hamburger');
+  if (links && links.classList.contains('open')) {
+    if (!links.contains(e.target) && (!btn || !btn.contains(e.target))) {
+      closeMenu();
+    }
+  }
+});
 
 // Navbar scroll shadow
 window.addEventListener('scroll', () => {
